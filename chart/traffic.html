@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Horizontal Bar Chart</title>
+    <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <script src="../firebase.config.js"></script>
+    <script src="Chart.js"></script>
+    <script src="utils.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container" style="width: 75%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+        var dataRef = firebase.database(),
+            searches = [],
+            counts = [];
+        dataRef.ref().on("child_added", function(snapshot) {
+            var search = snapshot.val();
+            searches.push(search.searchTerm);
+            counts.push(search.count);
+        }, function(errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+        });
+
+        var color = Chart.helpers.color;
+        var horizontalBarChartData = {
+            labels: searches,
+            datasets:
+            [{
+                label: 'Search Items',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: counts
+            }]
+        }
+
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myHorizontalBar = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: horizontalBarChartData,
+                options: {
+                    // Elements options apply to all of the options unless overridden in a dataset
+                    // In this case, we are setting the border of each horizontal bar to be 2px wide
+                    elements: {
+                        rectangle: {
+                            borderWidth: 2,
+                        }
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Horizontal Bar Chart'
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    },
+
+                }
+            });
+
+        };
+
+    </script>
+</body>
+
+</html>

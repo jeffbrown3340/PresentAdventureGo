@@ -1,0 +1,28 @@
+html,
+body {
+    height: 100%;
+    background-image: url("https://image.freepik.com/free-vector/party-background-with-golden-lights_1048-44.jpg");
+    background-size: cover;
+}
+
+body {
+    padding-top: 50px;
+/*    Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes.
+*/}
+
+#adventureTitle {
+    color: white;
+}
+
+h1, h2{
+	color: white;
+	font-weight: bold;
+}
+
+#searchField{
+	width: 100%;
+}
+
+#map {
+	height: 400px;
+}

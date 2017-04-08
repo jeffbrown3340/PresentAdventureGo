@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Adventure Go!</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- JLB 4-5-2017-0000EDT begin -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="https://api.eventful.com/js/api"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script src="eventful_api.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJeRNeoJlxyV7NFd0vjocmBodXNztqG_U"></script> 
+    <script src="GoogleMapAPI.js"></script>
+    <!-- JLB 4-5-2017-0000EDT end, see also script tag bottom of body -->
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div class="navbar navbar-inverse navbar-fixed-top" id="topBar" role="navigation">
+        <a class="navbar-brand" id="adventureTitle" href="index.html">Adventure Go!</a>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="page-header">Events
+                </h1>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-group" id="searchField">
+                            <input type="text" class="form-control" id="iC" placeholder="Keyword">
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="iL" placeholder="Location">
+                            <span class="input-group-addon" onclick="getEventfulObjs()" id="locationSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                        </div>
+                        <!-- /input-group -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+                <!-- /input-group -->
+            </div>
+        </div>
+        <br>
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="thumbnail" id="th0">
+                    <img class="img-responsive" alt="">
+                    <div class="caption">
+                        <h3><br>
+                            <small></small>
+                        </h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Map Column -->
+            <!-- jlb added id map -->
+            <div class="col-md-8" id="map">
+                <!-- Embedded Google Map -->
+                <!-- jlb removed test map -->
+                <!--<iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe> -->
+            </div>
+            <!-- Contact Details Column -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Featured Events</h2>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="thumbnail" id="th1">
+                    <!-- jlb removed all placeholders to eliminate warnings -->
+                    <img class="img-responsive" alt="">
+                    <div class="caption">
+                        <h3><br>
+                            <small></small>
+                        </h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="thumbnail" id="th2">
+                    <img class="img-responsive" alt="">
+                    <div class="caption">
+                        <h3><br>
+                            <small></small>
+                        </h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="thumbnail" id="th3">
+                    <img class="img-responsive" alt="">
+                    <div class="caption">
+                        <h3><br>
+                            <small></small>
+                        </h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="thumbnail" id="th4">
+                    <img class="img-responsive" alt="">
+                    <div class="caption">
+                        <h3><br>
+                            <small></small>
+                        </h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="firebase.config.js"></script>
+    <script>
+    var howManyResults = 5;
+    $("#iC").val("Music");
+    $("#iL").val("Miami");
+    setTimeout(function() {
+        $("#iC").val("");
+        $("#iL").val("");
+    }, 3000);
+    getEventfulObjs();
+    </script>
+</body>
+
+</html>
